@@ -82,11 +82,11 @@ resource "aws_route_table_association" "tf-r-assoc" {
 # Create key pair
 resource "aws_key_pair" "tf-key" {
   key_name   = "tf-key"
-  public_key = "-----BEGIN RSA PRIVATE KEY-----MIIEpQIBAAKCAQEAqcphvzgCgV/J/P+PMA5n61UVSoM1k0TLmT6zHusLv31rgWKt2inJeZdKtxuVyS27TTq17E2fEH1N9a3buxY5ar2QA9I9InATmihJaE8OCCkAZTLQVzEFJFjS/sYTGyte3Z1i+Rlmf6efY/9Z026KD+NjD1uf/yuXcos0ENtTy/2b97WDTqLKTrXNbcJSvfW2JPVOmnrYhaTDYvPHEBOa/UP5Q92+N7WovXgH1KuXgvk+ceaWvBr+NM8lOw7h6grmjVPG9bMVnODQROYUjqf3EDBCXDx7Hi/aWRH5PcI8/HEsCq7/2DRZqMUvuR0Eer6Fx+HmvvIY04kvTqgPt9vwmwIDAQABAoIBAG2LiHMhxOQJlD1p+M0NjliUBW+Upf1FFoLhpBlflq3OUo0gyIAIE9giF296GbK5ka2rInK6RdUSszi+GhVjqlnGweLlQtI0M0FzmqD02F3Fbl7cYPTQSLwBnugHjY4q9kLPZ2rFy46y7DBNMHwsRmEn2OKwv9KXIlghnc7+Ytspz5a33vkIAbFElJ5Jx0Qm+nL430kB0xEMkQ9y0BIgaORCJzHjMvNKJNz79/AN06dSvZxR3G5s5supCvxrCEtAafvPDmLhsGAig/G+izQsp8SFUD2gnDyTFb+bf+8/gYGI8nYEDKjBpVygSfXH2GA0bu/E2MNID0+Z4zxxwMR2rdECgYEA5mwdFcAXlbXcnVj1a7uGGk2tVsNAYnMrjX9dDQqynfPCx0Y4ZVx+4ifZzPTwKhZO3iaVDG5sgQz9Awb59G8NL/mquT3g7fdV1GyUrBbZqETHyfXrnvKAYjZ2Hw0yjxkW5BVfFrsE1Jt1ZNOLaagGdZVpObI55eq8X95GUvi6e3kCgYEAvKNNRR0dKV1KB/1RoW0dIBzWszbgM34CN0BNHRP/V56hodo5mmxHILpvqOCCLzhggZyHqyD/b3mkPK0+PrL1yVge6H7nE9TfA01wMG4F089CGtEGvH+tQFuDVBp9eZuUnykd7uKTp0g8UvCNfixWiAmeCOOFJng0UWt4wUeys7MCgYEAhJP4OCeKam11PmOM8iu3gTLoZV96kCrMCGIb3AEnvJIgpB/XGxsZNm7PdooIFW84ecGhSMHQVIBwo2lEMEwlPlFc1bCw1rrU+6Bt+oY7PgI1IhMJOy80h03msP8a9BLvhNR3HdEFen7oENdXA7fV35nULYpKnett74so01yhj6ECgYEAn3l7QLu9RJQOmzSIh21EmzpmNDpnToDwBJ/C0ZtvWjbMtJVV73wsobmb3mx3As6pn8miVIVgDXEL7RQVNFJ9QgvSjYGDf5uOMi+MchUBrjBg1WTzSfaylF8JZtfCTkW+XtQW7zbz1w9VmFSvegSn3vgqd59JmN00dcTi4JvpsssCgYEAqaVbw6NMdZVxJ2ZzKwqsvt9fUqFyk85Ra4aRsFjozLyQcOYr9MwpmM0CzAilKFYsoRG4VEIS0pxFwDmH/zzQcm06OQRhrBPUxxsdPiNU3MygpoJKpSkBYv2UztsxOxPLJ5b9p1ZUHmengosYVE4/h1d2pyL0sISsNGak+qBxpfI=-----END RSA PRIVATE KEY-----"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzBaFk81xSjotcrjmTvaWY4AFZ54zdd4pZtrNU1fhxQGosWkx22EjVfRQM0UabjNvf+6M8v5Vfq9+o1jYv2wlQ+M8AoYn+nFFxZ505FV0/3z71nNG4Hj52auI2BHdRnshV4hKxxGbSe/QbnYcfRU3Gt8ugB8424a1ybrGl8nslt9gRNlAxS2v0s4KIObI0+TwuTwMtWDlOIXdcnr92F20XYo4H3HYIYoOS2YLmUMyL4rIbSDfvdMzvp6+FTEhkF3AadKzDX/eH8Nfj38FygorxBxT/71xu3XOoXnXKIKoJQ+/jT6rlA7fJqttU7O0AknVqYogJGJ+kSmZKuhR36paVhmUeDB5mkok/VcuZNPay719refOGeEWOGy9L4PQ8SfrlDcooyYFvK5B4zXgs8HSulk1473A3pVZSsc+luaVZ1tiMX4eexEpyvYn0G5A2lYwydAWmh37cfmhziHWsduR3AXvYFkjmq1WC7bv0tdxorCLB7jU8WE/AasYslfzM9K8= dhougaard@DESKTOP-ELTS15O"
 }
 
 # Create EC2 instances
-resource "aws_instance" "instance" {
+resource "aws_instance" "dev" {
   ami                    = "ami-080e1f13689e07408"
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.tf-subnet.id
@@ -95,7 +95,47 @@ resource "aws_instance" "instance" {
   key_name               = aws_key_pair.tf-key.key_name
 
   tags = {
-    Name = "Instance"
+    Name = "dev"
+  }
+
+  user_data = <<-EOF
+         #!/bin/bash
+         wget http://computing.utahtech.edu/it/3110/notes/2021/terraform/install.sh -O /tmp/install.sh
+         chmod +x /tmp/install.sh
+         source /tmp/install.sh
+         EOF
+}
+
+resource "aws_instance" "test" {
+  ami                    = "ami-080e1f13689e07408"
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.tf-subnet.id
+  vpc_security_group_ids        = [aws_security_group.tf-sg.id]
+  associate_public_ip_address = true
+  key_name               = aws_key_pair.tf-key.key_name
+
+  tags = {
+    Name = "test"
+  }
+
+  user_data = <<-EOF
+         #!/bin/bash
+         wget http://computing.utahtech.edu/it/3110/notes/2021/terraform/install.sh -O /tmp/install.sh
+         chmod +x /tmp/install.sh
+         source /tmp/install.sh
+         EOF
+}
+
+resource "aws_instance" "prod" {
+  ami                    = "ami-080e1f13689e07408"
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.tf-subnet.id
+  vpc_security_group_ids        = [aws_security_group.tf-sg.id]
+  associate_public_ip_address = true
+  key_name               = aws_key_pair.tf-key.key_name
+
+  tags = {
+    Name = "prod"
   }
 
   user_data = <<-EOF
@@ -107,7 +147,7 @@ resource "aws_instance" "instance" {
 }
 
 resource "aws_ebs_volume" "extra_storage" {
-  availability_zone = aws_instance.instance.availability_zone
+  availability_zone = aws_instance.dev.availability_zone
   size              = 5
   tags = {
     Name = "week10storage"
@@ -117,10 +157,10 @@ resource "aws_ebs_volume" "extra_storage" {
 resource "aws_volume_attachment" "ebs_attach" {
   device_name = "/dev/sdv"
   volume_id   = aws_ebs_volume.extra_storage.id
-  instance_id = aws_instance.instance.id
+  instance_id = aws_instance.dev.id
 }
 
-output "ip_of_instance" {
-  value         = aws_instance.instance.public_ip
-  description   = "Public IP of github created instance"
+output "ip_of_dev" {
+  value         = aws_instance.dev.public_ip
+  description   = "Public IP of dev instance"
 }
