@@ -82,7 +82,33 @@ resource "aws_route_table_association" "tf-r-assoc" {
 # Create key pair
 resource "aws_key_pair" "tf-key" {
   key_name   = "tf-key"
-  public_key = file("~/.ssh/id_rsa.pub")
+  public_key = "-----BEGIN RSA PRIVATE KEY-----
+MIIEpQIBAAKCAQEAqcphvzgCgV/J/P+PMA5n61UVSoM1k0TLmT6zHusLv31rgWKt
+2inJeZdKtxuVyS27TTq17E2fEH1N9a3buxY5ar2QA9I9InATmihJaE8OCCkAZTLQ
+VzEFJFjS/sYTGyte3Z1i+Rlmf6efY/9Z026KD+NjD1uf/yuXcos0ENtTy/2b97WD
+TqLKTrXNbcJSvfW2JPVOmnrYhaTDYvPHEBOa/UP5Q92+N7WovXgH1KuXgvk+ceaW
+vBr+NM8lOw7h6grmjVPG9bMVnODQROYUjqf3EDBCXDx7Hi/aWRH5PcI8/HEsCq7/
+2DRZqMUvuR0Eer6Fx+HmvvIY04kvTqgPt9vwmwIDAQABAoIBAG2LiHMhxOQJlD1p
++M0NjliUBW+Upf1FFoLhpBlflq3OUo0gyIAIE9giF296GbK5ka2rInK6RdUSszi+
+GhVjqlnGweLlQtI0M0FzmqD02F3Fbl7cYPTQSLwBnugHjY4q9kLPZ2rFy46y7DBN
+MHwsRmEn2OKwv9KXIlghnc7+Ytspz5a33vkIAbFElJ5Jx0Qm+nL430kB0xEMkQ9y
+0BIgaORCJzHjMvNKJNz79/AN06dSvZxR3G5s5supCvxrCEtAafvPDmLhsGAig/G+
+izQsp8SFUD2gnDyTFb+bf+8/gYGI8nYEDKjBpVygSfXH2GA0bu/E2MNID0+Z4zxx
+wMR2rdECgYEA5mwdFcAXlbXcnVj1a7uGGk2tVsNAYnMrjX9dDQqynfPCx0Y4ZVx+
+4ifZzPTwKhZO3iaVDG5sgQz9Awb59G8NL/mquT3g7fdV1GyUrBbZqETHyfXrnvKA
+YjZ2Hw0yjxkW5BVfFrsE1Jt1ZNOLaagGdZVpObI55eq8X95GUvi6e3kCgYEAvKNN
+RR0dKV1KB/1RoW0dIBzWszbgM34CN0BNHRP/V56hodo5mmxHILpvqOCCLzhggZyH
+qyD/b3mkPK0+PrL1yVge6H7nE9TfA01wMG4F089CGtEGvH+tQFuDVBp9eZuUnykd
+7uKTp0g8UvCNfixWiAmeCOOFJng0UWt4wUeys7MCgYEAhJP4OCeKam11PmOM8iu3
+gTLoZV96kCrMCGIb3AEnvJIgpB/XGxsZNm7PdooIFW84ecGhSMHQVIBwo2lEMEwl
+PlFc1bCw1rrU+6Bt+oY7PgI1IhMJOy80h03msP8a9BLvhNR3HdEFen7oENdXA7fV
+35nULYpKnett74so01yhj6ECgYEAn3l7QLu9RJQOmzSIh21EmzpmNDpnToDwBJ/C
+0ZtvWjbMtJVV73wsobmb3mx3As6pn8miVIVgDXEL7RQVNFJ9QgvSjYGDf5uOMi+M
+chUBrjBg1WTzSfaylF8JZtfCTkW+XtQW7zbz1w9VmFSvegSn3vgqd59JmN00dcTi
+4JvpsssCgYEAqaVbw6NMdZVxJ2ZzKwqsvt9fUqFyk85Ra4aRsFjozLyQcOYr9Mwp
+mM0CzAilKFYsoRG4VEIS0pxFwDmH/zzQcm06OQRhrBPUxxsdPiNU3MygpoJKpSkB
+Yv2UztsxOxPLJ5b9p1ZUHmengosYVE4/h1d2pyL0sISsNGak+qBxpfI=
+-----END RSA PRIVATE KEY-----"
 }
 
 # Create EC2 instances
