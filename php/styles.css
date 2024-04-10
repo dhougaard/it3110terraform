@@ -1,0 +1,33 @@
+/* CSS styles for the HTML provided */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+}
+
+p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Adjustments for better readability */
+p:first-child {
+    margin-top: 20px;
+}
+
+p:last-child {
+    margin-bottom: 20px;
+}
+

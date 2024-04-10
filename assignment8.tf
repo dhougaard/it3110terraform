@@ -40,6 +40,13 @@ resource "aws_security_group" "tf-sg" {
   }
 
   ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+
+  ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
@@ -82,11 +89,11 @@ resource "aws_route_table_association" "tf-r-assoc" {
 # Create key pair
 resource "aws_key_pair" "tf-key" {
   key_name   = "tf-key"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCzBaFk81xSjotcrjmTvaWY4AFZ54zdd4pZtrNU1fhxQGosWkx22EjVfRQM0UabjNvf+6M8v5Vfq9+o1jYv2wlQ+M8AoYn+nFFxZ505FV0/3z71nNG4Hj52auI2BHdRnshV4hKxxGbSe/QbnYcfRU3Gt8ugB8424a1ybrGl8nslt9gRNlAxS2v0s4KIObI0+TwuTwMtWDlOIXdcnr92F20XYo4H3HYIYoOS2YLmUMyL4rIbSDfvdMzvp6+FTEhkF3AadKzDX/eH8Nfj38FygorxBxT/71xu3XOoXnXKIKoJQ+/jT6rlA7fJqttU7O0AknVqYogJGJ+kSmZKuhR36paVhmUeDB5mkok/VcuZNPay719refOGeEWOGy9L4PQ8SfrlDcooyYFvK5B4zXgs8HSulk1473A3pVZSsc+luaVZ1tiMX4eexEpyvYn0G5A2lYwydAWmh37cfmhziHWsduR3AXvYFkjmq1WC7bv0tdxorCLB7jU8WE/AasYslfzM9K8= dhougaard@DESKTOP-ELTS15O"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC/6CSHEnFrO3QnfMsLgeWf3JjIMj6Xg+KWPq6bguTCP9kR2gUFxRunuL9BSQCL529c3BW2Q35kL7RSidrwA7I0IbiNAaxswP/JUjuIbCdFdQvWl/SoMg1FNVnAMbO4qkrLcn7ib3WbfQvRnEExuexWmWtrN25CJvsmIxPgvV30/v4uFQgUNMTStqNKHpTM3m+3TsXM2nMaXSz54oR6DIH/rLrzzpUrV25QlvtWV/Q+qUiChxLt0brqU26bzs/KzcCN96Qn5LCtp27ZUTh63NHG+dEXbEkPFLq24pg4QFz1tm2DdC3VBI9lXxXu68G45zk55PzMGxeGU3pQLZ+d/+UQb1GkY6rHdUIZTn7bT/jocXkraziDdAgrvQTlW6zPR87TxxIlYAuQNZePzqp7LhuLcl5lvRgBUvi/e/wSnl32nEE9AMObe7zhB3A36mzqr9tmekVs+pC7qXts7G8zSY2G4t298oiqnyRyFuj1bL3SAZE736r3Wkl8lxYAbAqneVM= dhougaard@dhcp"
 }
 
 # Create EC2 instances
-resource "aws_instance" "dev" {
+resource "aws_instance" "php" {
   ami                    = "ami-080e1f13689e07408"
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.tf-subnet.id
@@ -95,7 +102,7 @@ resource "aws_instance" "dev" {
   key_name               = aws_key_pair.tf-key.key_name
 
   tags = {
-    Name = "dev"
+    Name = "php"
   }
 
   user_data = <<-EOF
@@ -106,7 +113,7 @@ resource "aws_instance" "dev" {
          EOF
 }
 
-resource "aws_instance" "test" {
+resource "aws_instance" "python" {
   ami                    = "ami-080e1f13689e07408"
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.tf-subnet.id
@@ -115,7 +122,7 @@ resource "aws_instance" "test" {
   key_name               = aws_key_pair.tf-key.key_name
 
   tags = {
-    Name = "test"
+    Name = "python"
   }
 
   user_data = <<-EOF
@@ -126,41 +133,12 @@ resource "aws_instance" "test" {
          EOF
 }
 
-resource "aws_instance" "prod" {
-  ami                    = "ami-080e1f13689e07408"
-  instance_type          = "t2.micro"
-  subnet_id              = aws_subnet.tf-subnet.id
-  vpc_security_group_ids        = [aws_security_group.tf-sg.id]
-  associate_public_ip_address = true
-  key_name               = aws_key_pair.tf-key.key_name
-
-  tags = {
-    Name = "prod"
-  }
-
-  user_data = <<-EOF
-         #!/bin/bash
-         wget http://computing.utahtech.edu/it/3110/notes/2021/terraform/install.sh -O /tmp/install.sh
-         chmod +x /tmp/install.sh
-         source /tmp/install.sh
-         EOF
+output "ip_of_php" {
+  value         = aws_instance.php.public_ip
+  description   = "Public IP of php instance"
 }
 
-resource "aws_ebs_volume" "extra_storage" {
-  availability_zone = aws_instance.dev.availability_zone
-  size              = 5
-  tags = {
-    Name = "week10storage"
-  }
-}
-
-resource "aws_volume_attachment" "ebs_attach" {
-  device_name = "/dev/sdv"
-  volume_id   = aws_ebs_volume.extra_storage.id
-  instance_id = aws_instance.dev.id
-}
-
-output "ip_of_dev" {
-  value         = aws_instance.dev.public_ip
-  description   = "Public IP of dev instance"
+output "ip_of_python" {
+  value         = aws_instance.python.public_ip
+  description   = "Public IP of python instance"
 }
