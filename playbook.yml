@@ -1,0 +1,16 @@
+# playbook.yml
+
+- name: Configure PHP and Python instances
+  hosts: all
+  become: yes
+  gather_facts: no
+
+  roles:
+    - role: mphp
+      vars:
+        php_ip_address: "35.153.231.239"
+
+    - role: mpython
+      vars:
+        python_ip_address: "100.24.72.88"
+

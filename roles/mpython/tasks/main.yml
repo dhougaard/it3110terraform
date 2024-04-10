@@ -1,0 +1,25 @@
+# roles/mpython/tasks/main.yml
+
+- name: Copy files from py directory to root directory
+  copy:
+    src: ../../../../py/
+    dest: /
+
+- name: Install required packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - gunicorn
+    - fortune
+    - python3-pip
+
+- name: Use pip to install packages from requirements.txt
+  pip:
+    requirements: /requirements.txt
+
+- name: Run Python script using gunicorn
+  shell: |
+    cd /
+    gunicorn -b 0.0.0.0:8080 fortune:__hug_wsgi__ --daemon
+
