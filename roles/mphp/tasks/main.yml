@@ -2,7 +2,7 @@
 
 - name: Copy PHP files to appropriate location
   copy:
-    src: ../../../../php/mypage.php
+    src: ../../../php/mypage.php
     dest: /var/www/html/index.php
 
 - name: Replace link in PHP file with correct IP address

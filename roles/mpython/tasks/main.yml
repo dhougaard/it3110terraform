@@ -2,7 +2,7 @@
 
 - name: Copy files from py directory to root directory
   copy:
-    src: ../../../../py/
+    src: ../../../py/
     dest: /
 
 - name: Install required packages
