@@ -87,8 +87,8 @@ resource "aws_route_table_association" "tf-r-assoc" {
 }
 
 # Create key pair
-resource "aws_key_pair" "tf-key" {
-  key_name   = "tf-key"
+resource "aws_key_pair" "dhcp-key" {
+  key_name   = "dhcp-key"
   public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC/6CSHEnFrO3QnfMsLgeWf3JjIMj6Xg+KWPq6bguTCP9kR2gUFxRunuL9BSQCL529c3BW2Q35kL7RSidrwA7I0IbiNAaxswP/JUjuIbCdFdQvWl/SoMg1FNVnAMbO4qkrLcn7ib3WbfQvRnEExuexWmWtrN25CJvsmIxPgvV30/v4uFQgUNMTStqNKHpTM3m+3TsXM2nMaXSz54oR6DIH/rLrzzpUrV25QlvtWV/Q+qUiChxLt0brqU26bzs/KzcCN96Qn5LCtp27ZUTh63NHG+dEXbEkPFLq24pg4QFz1tm2DdC3VBI9lXxXu68G45zk55PzMGxeGU3pQLZ+d/+UQb1GkY6rHdUIZTn7bT/jocXkraziDdAgrvQTlW6zPR87TxxIlYAuQNZePzqp7LhuLcl5lvRgBUvi/e/wSnl32nEE9AMObe7zhB3A36mzqr9tmekVs+pC7qXts7G8zSY2G4t298oiqnyRyFuj1bL3SAZE736r3Wkl8lxYAbAqneVM= dhougaard@dhcp"
 }
 
@@ -99,7 +99,7 @@ resource "aws_instance" "php" {
   subnet_id              = aws_subnet.tf-subnet.id
   vpc_security_group_ids        = [aws_security_group.tf-sg.id]
   associate_public_ip_address = true
-  key_name               = aws_key_pair.tf-key.key_name
+  key_name               = aws_key_pair.dhcp-key.key_name
 
   tags = {
     Name = "php"
@@ -119,7 +119,7 @@ resource "aws_instance" "python" {
   subnet_id              = aws_subnet.tf-subnet.id
   vpc_security_group_ids        = [aws_security_group.tf-sg.id]
   associate_public_ip_address = true
-  key_name               = aws_key_pair.tf-key.key_name
+  key_name               = aws_key_pair.dhcp-key.key_name
 
   tags = {
     Name = "python"
